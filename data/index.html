@@ -1,0 +1,42 @@
+﻿<!doctype html>
+<html>
+<head>
+    <title>SleepUino Pre-Development</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/my-custom-theme.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.struc.min.css" />
+    <link rel="stylesheet" href="css/sleepUino.css" />
+    <script src="./jquery-2.2.4.min.js"></script>
+    <script src="./jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body> 
+    <div class="su-base" data-role="page" class="ui-responsive-panel" id="page">
+        <div class="su-header ui-bar-inherit" data-role="header" role="banner">
+            <h2 class="ui-title" role="heading" aria-level="1">
+                <img src="./LogoPreDev.png" alt="WebInterfaceExample">
+            </h2>
+        </div>
+        <div id="playPage">
+            <div class="ui-body ui-body-a ui-corner-all">
+                <h3 id="headerAlarm" class="ui-bar ui-bar-a ui-corner-all">LED</h3>
+                <input type="checkbox" data-role="flipswitch" id="flipAlarm" data-on-text="On" data-off-text="Off" checked="false" onchange="UiFunc.handleFlipLed()">                   
+            </div>
+        </div>         
+        
+</body>
+<script src="./myFunctions.js"></script>
+<script src="./SleepUinoCom.js"></script>
+<script src="./multiLangSupport.js"></script>
+<script>
+    'use strict';
+    window.onload = function() {
+        //For test without SleepUINO use SleepUinoCom.enableServerCom = false
+        //SleepUinoCom.enableServerCom = false;
+        $("#flipAlarm").prop("checked", false).flipswitch('refresh');
+    };
+</script>
+</html>
+<!--
+    [[21, "100", "ledMoonBrightness"], [29, "100", "ledSunBrightness"]]
+-->
