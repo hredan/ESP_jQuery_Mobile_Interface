@@ -1,11 +1,21 @@
 
 #include "handleWebpage.h"
 
-ESP8266WebServer* HandleWebpage::_webServer = nullptr;
+#ifdef ESP32
+  WebServer* HandleWebpage::_webServer = nullptr;
+#else
+  ESP8266WebServer* HandleWebpage::_webServer = nullptr;
+#endif
+
+
 
 HandleWebpage::HandleWebpage()
 {
-  _webServer = new ESP8266WebServer(80);
+  #ifdef ESP32
+    _webServer = new WebServer(80);
+  #else
+    _webServer = new ESP8266WebServer(80);
+  #endif
 };
 
 void HandleWebpage::handleRoot() {                         // When URI / is requested, send a web page with a button to toggle the LED
@@ -77,9 +87,9 @@ bool HandleWebpage::loadFromLittleFS(String path){
   else if(path.endsWith(".xml")) dataType = "text/xml";
   else if(path.endsWith(".pdf")) dataType = "application/pdf";
   else if(path.endsWith(".zip")) dataType = "application/zip";
-  if (LittleFS.exists(path))
+  if (MYFS.exists(path))
   {
-    File dataFile = LittleFS.open(path.c_str(), "r");
+    File dataFile = MYFS.open(path.c_str(), "r");
     if (_webServer->hasArg("download")) dataType = "application/octet-stream";
 
     if (_webServer->streamFile(dataFile, dataType) != dataFile.size()) {
