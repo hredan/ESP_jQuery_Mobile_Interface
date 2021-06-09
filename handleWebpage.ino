@@ -31,11 +31,19 @@ void HandleWebpage::handleSetLed(){
     Serial.printf("ledValue: %s\n", ledValue.c_str());
     if(ledValue == "true")
     {
-      digitalWrite(LED_BUILTIN, LOW);
+      #ifdef ESP32
+          digitalWrite(LED_BUILTIN, HIGH);
+      #else
+          digitalWrite(LED_BUILTIN, LOW);
+      #endif
     }
     else
     {
-      digitalWrite(LED_BUILTIN, HIGH);
+      #ifdef ESP32
+          digitalWrite(LED_BUILTIN, LOW);
+      #else
+          digitalWrite(LED_BUILTIN, HIGH);
+      #endif
     }
     
     _webServer->send(200, "text/plane", "{\"success\": true}");
