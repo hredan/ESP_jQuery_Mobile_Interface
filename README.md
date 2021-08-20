@@ -5,6 +5,6 @@ This example here is using a Captive Portal, for an easy connection with the sin
 
 **A simple interface connection for all WLAN devices, independently of the used os platform.**
 
-If you have an ESP8266 or ESP32 you can find final binaries of this example in the [ESPEasyFlasher2.0 Release Assets](https://github.com/hredan/ESPEASYFLASHER_2.0/releases/latest).
+If you have an ESP8266 or ESP32 you can find final binaries of this sketch as example for the [ESPEasyFlasher2.0](https://github.com/hredan/ESPEASYFLASHER_2.0#try-it).
 
 ![ESP_WebInterface_Blink](https://user-images.githubusercontent.com/48091357/116424378-c0727800-a841-11eb-9733-5a0ae4225251.gif)
