@@ -1,7 +1,7 @@
 rem toolPath, "-c", dataPath, "-p", spiPage+"", "-b", spiBlock+"", "-s", (spiEnd - spiStart)+"", imagePath
 
 set LOCALPATH=%~dp0
-set BUILD_PATH=%LOCALPATH%..\build
+set BUILD_PATH=%LOCALPATH%..\build_data
 set HOME=%HOMEDRIVE%%HOMEPATH%
 
 mkdir %BUILD_PATH%

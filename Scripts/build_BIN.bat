@@ -2,8 +2,8 @@ REM Windows build script
 
 set ARDUINO_PATH="C:\Program Files (x86)\Arduino"
 set LOCALPATH=%~dp0
-set BUILD_PATH=%LOCALPATH%..\build
-set BUILD_CACHE_PATH=%LOCALPATH%..\cache
+set BUILD_PATH=%LOCALPATH%..\build_esp8266
+set BUILD_CACHE_PATH=%LOCALPATH%..\cache_esp8266
 set HOME=%HOMEDRIVE%%HOMEPATH%
 
 set GCC_VERSION=3.0.4-gcc10.3-1757bed
