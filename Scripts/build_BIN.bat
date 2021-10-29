@@ -26,7 +26,7 @@ set BUILD_PARAMETER=-logger=machine -hardware %ARDUINO_PATH%\hardware^
  -prefs=runtime.tools.mkspiffs-%GCC_VERSION%.path=%HOME%\AppData\Local\Arduino15\packages\esp8266\tools\mkspiffs\%GCC_VERSION%^
  -prefs=runtime.tools.xtensa-lx106-elf-gcc.path=%HOME%\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\%GCC_VERSION%^
  -prefs=runtime.tools.xtensa-lx106-elf-gcc-%GCC_VERSION%.path=%HOME%\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\%GCC_VERSION%^
- -verbose D:\Freiiiiheit\GIT\ESP_jQuery_Mobile_Interface\ESP_jQuery_Mobile_Interface.ino
+ -verbose ..\ESP_jQuery_Mobile_Interface.ino
 
 mkdir %BUILD_PATH%
 mkdir %BUILD_CACHE_PATH%
