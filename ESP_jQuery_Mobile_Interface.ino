@@ -20,16 +20,12 @@
 
 
 #ifdef ESP32
-#include <LITTLEFS.h>
-#include <WiFi.h>  // https://github.com/espressif/arduino-esp32
-#define MYFS LITTLEFS
-const int LED_BUILTIN = 2;
+  #include <WiFi.h>  // https://github.com/espressif/arduino-esp32
 #else
-#include <ESP8266WiFi.h>  // https://github.com/esp8266/Arduino
+  #include <ESP8266WiFi.h>  // https://github.com/esp8266/Arduino
+#endif
 
 #include "LittleFS.h"
-#define MYFS LittleFS
-#endif
 #include "handleWebpage.h"
 
 // declaration of needed instances
@@ -43,7 +39,7 @@ void setup() {
   digitalWrite(LED_BUILTIN, HIGH);  // set led off
 
   // init little filesystem
-  if (MYFS.begin()) {
+  if (LittleFS.begin()) {
     Serial.print("LittleFS started successfully\n");
 #ifdef ESP32
     Serial.printf("FS total Bytes %d\n", MYFS.totalBytes());

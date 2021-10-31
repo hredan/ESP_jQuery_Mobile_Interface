@@ -1,3 +1,3 @@
 cd ..
-cpplint --exclude=build --extensions=hpp,cpp,h,c,ino --recursive .
+cpplint --exclude=build_esp8266 --extensions=hpp,cpp,h,c,ino --recursive .
 pause
