@@ -1,7 +1,7 @@
 #!/bin/bash
 TOOL_DIR="./tools"
-TOOL_URL="https://github.com/earlephilhower/mklittlefs/releases/download/3.0.0/x86_64-linux-gnu-mklittlefs-295fe9b.tar.gz"
-
+MKLITTLEFS_VERSION="3.0.0"
+TOOL_URL="https://github.com/earlephilhower/mklittlefs/releases/download/$MKLITTLEFS_VERSION/x86_64-linux-gnu-mklittlefs-295fe9b.tar.gz"
 TOOL=./tools/mklittlefs/mklittlefs
 #check tool dir#
 if [ ! -d "$TOOL_DIR" ]
