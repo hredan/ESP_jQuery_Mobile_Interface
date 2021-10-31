@@ -2,8 +2,8 @@ REM Windows build script
 
 set ARDUINO_PATH="C:\Program Files (x86)\Arduino"
 set LOCALPATH=%~dp0
-set BUILD_PATH=%LOCALPATH%..\build
-set BUILD_CACHE_PATH=%LOCALPATH%..\cache
+set BUILD_PATH=%LOCALPATH%..\build_esp8266
+set BUILD_CACHE_PATH=%LOCALPATH%..\cache_esp8266
 set HOME=%HOMEDRIVE%%HOMEPATH%
 
 set GCC_VERSION=3.0.4-gcc10.3-1757bed
@@ -26,7 +26,7 @@ set BUILD_PARAMETER=-logger=machine -hardware %ARDUINO_PATH%\hardware^
  -prefs=runtime.tools.mkspiffs-%GCC_VERSION%.path=%HOME%\AppData\Local\Arduino15\packages\esp8266\tools\mkspiffs\%GCC_VERSION%^
  -prefs=runtime.tools.xtensa-lx106-elf-gcc.path=%HOME%\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\%GCC_VERSION%^
  -prefs=runtime.tools.xtensa-lx106-elf-gcc-%GCC_VERSION%.path=%HOME%\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\%GCC_VERSION%^
- -verbose D:\Freiiiiheit\GIT\ESP_jQuery_Mobile_Interface\ESP_jQuery_Mobile_Interface.ino
+ -verbose ..\ESP_jQuery_Mobile_Interface.ino
 
 mkdir %BUILD_PATH%
 mkdir %BUILD_CACHE_PATH%
