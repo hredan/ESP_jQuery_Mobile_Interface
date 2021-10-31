@@ -117,8 +117,8 @@ bool HandleWebpage::loadFromLittleFS(String path) {
     dataType = "application/pdf";
   else if (path.endsWith(".zip"))
     dataType = "application/zip";
-  if (MYFS.exists(path)) {
-    File dataFile = MYFS.open(path.c_str(), "r");
+  if (LittleFS.exists(path)) {
+    File dataFile = LittleFS.open(path.c_str(), "r");
     if (_webServer->hasArg("download")) dataType = "application/octet-stream";
 
     if (_webServer->streamFile(dataFile, dataType) != dataFile.size()) {

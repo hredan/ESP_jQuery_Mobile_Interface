@@ -42,8 +42,8 @@ void setup() {
   if (LittleFS.begin()) {
     Serial.print("LittleFS started successfully\n");
 #ifdef ESP32
-    Serial.printf("FS total Bytes %d\n", MYFS.totalBytes());
-    Serial.printf("FS used Bytes %d\n", MYFS.usedBytes());
+    Serial.printf("FS total Bytes %d\n", LittleFS.totalBytes());
+    Serial.printf("FS used Bytes %d\n", LittleFS.usedBytes());
 #else
     FSInfo fs_info;
     LittleFS.info(fs_info);
