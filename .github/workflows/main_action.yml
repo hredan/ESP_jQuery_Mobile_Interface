@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-python@v1
-      - run: sh ./Scripts/build_data.sh ${env.SKETCH_NAME}
+      - run: sh ./Scripts/build_data.sh ${{env.SKETCH_NAME}}
       - run: sh ./Scripts/build_sketch.sh ESP8266
       - run: sh ./Scripts/build_sketch.sh ESP32
       - run: sh ./Scripts/save_raw_data.sh
