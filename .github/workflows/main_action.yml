@@ -27,5 +27,9 @@ jobs:
       - run: sh ./Scripts/build_sketch.sh ESP8266
       - run: sh ./Scripts/build_sketch.sh ESP32
       - run: sh ./Scripts/save_raw_data.sh
+      - uses: actions/upload-artifact@v1
+        with:
+          name: store-raw-build-data
+          path: ./Artifacts/raw_build_data.zip
   
           
