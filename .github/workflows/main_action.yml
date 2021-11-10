@@ -23,13 +23,18 @@ jobs:
       - uses: actions/checkout@v1
       - uses: actions/setup-python@v1
       - run: pip install esptool
-      - run: sh ./Scripts/build_data.sh ${{env.SKETCH_NAME}}
-      - run: sh ./Scripts/build_sketch.sh ESP8266
-      - run: sh ./Scripts/build_sketch.sh ESP32
-      - run: sh ./Scripts/save_raw_data.sh
+      - run: sh ./ESP_Action_Build_Scripts/build_data.sh ${{env.SKETCH_NAME}}
+      - run: sh ./ESP_Action_Build_Scripts/build_sketch.sh ESP8266
+      - run: sh ./ESP_Action_Build_Scripts/build_sketch.sh ESP32
+#      - run: sh ./ESP_Action_Build_Scripts/save_raw_data.sh
+#      - uses: actions/upload-artifact@v1
+#        with:
+#          name: store-raw-build-data
+#          path: ./Artifacts/raw_build_data.zip
+      - run: sh ./ESP_Action_Build_Scripts/create_eef_package.sh ${{env.SKETCH_NAME}}
       - uses: actions/upload-artifact@v1
         with:
-          name: store-raw-build-data
-          path: ./Artifacts/raw_build_data.zip
+          name: store-eef-package
+          path: ./Artifacts/${{env.SKETCH_NAME}}.eep
   
           
