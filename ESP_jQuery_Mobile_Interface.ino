@@ -35,9 +35,15 @@ void setup() {
   Serial.begin(115200);
   Serial.print("\n");
 
+#ifdef ESP32
+  pinMode(2, OUTPUT);  // Initialize the LED pin as an output
+  pinMode(5, OUTPUT);  // Initialize the LED pin as an output
+  digitalWrite(2, HIGH);  // set led off
+  digitalWrite(5, HIGH);  // set led off
+#else
   pinMode(LED_BUILTIN, OUTPUT);  // Initialize the LED_BUILTIN pin as an output
   digitalWrite(LED_BUILTIN, HIGH);  // set led off
-
+#endif
   // init little filesystem
   if (LittleFS.begin()) {
     Serial.print("LittleFS started successfully\n");

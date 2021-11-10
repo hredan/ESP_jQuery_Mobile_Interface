@@ -47,13 +47,17 @@ void HandleWebpage::handleSetLed() {
     Serial.printf("ledValue: %s\n", ledValue.c_str());
     if (ledValue == "true") {
 #ifdef ESP32
-      digitalWrite(LED_BUILTIN, HIGH);
+      // LED_BUILTIN can be 2 or 5 for ESP32 Boards, for the example we take both
+      digitalWrite(2, HIGH);
+      digitalWrite(5, HIGH);
 #else
       digitalWrite(LED_BUILTIN, LOW);
 #endif
     } else {
 #ifdef ESP32
-      digitalWrite(LED_BUILTIN, LOW);
+      // LED_BUILTIN can be 2 or 5 for ESP32 Boards, for the example we take both
+      digitalWrite(2, LOW);
+      digitalWrite(5, LOW);
 #else
       digitalWrite(LED_BUILTIN, HIGH);
 #endif
