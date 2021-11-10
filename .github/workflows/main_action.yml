@@ -8,7 +8,7 @@ jobs:
     - uses: actions/setup-python@v2
     - run: pip install cpplint
     - run: cpplint --extensions=hpp,cpp,h,c,ino --recursive .
-  lint:
+  arduino_lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
         SKETCH_NAME: ESP_jQuery_Mobile_Interface
+        ESP32_VERSION: 2.0.1
+        ESP8266_VERSION: 3.0.2
     steps:
       - uses: actions/checkout@v2
         with:
@@ -26,17 +28,15 @@ jobs:
       - uses: actions/setup-python@v2
       - run: pip install esptool
       - run: sh ./ESP_Action_Build_Scripts/build_data.sh ${{env.SKETCH_NAME}}
-      - run: sh ./ESP_Action_Build_Scripts/build_sketch.sh ESP8266
-      - run: sh ./ESP_Action_Build_Scripts/build_sketch.sh ESP32
+      - run: sh ./ESP_Action_Build_Scripts/build_sketch.sh ESP8266 ${{env.ESP8266_VERSION}}
+      - run: sh ./ESP_Action_Build_Scripts/build_sketch.sh ESP32 ${{env.ESP32_VERSION}}
 #      - run: sh ./ESP_Action_Build_Scripts/save_raw_data.sh
 #      - uses: actions/upload-artifact@v2
 #        with:
-#          name: store-raw-build-data
 #          path: ./Artifacts/raw_build_data.zip
       - run: sh ./ESP_Action_Build_Scripts/create_eef_package.sh ${{env.SKETCH_NAME}}
       - uses: actions/upload-artifact@v2
-        with:
-          name: store-eef-package
+        with:          
           path: ./Artifacts/${{env.SKETCH_NAME}}.eep
   
           
