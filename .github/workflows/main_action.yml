@@ -34,10 +34,10 @@ jobs:
 #      - uses: actions/upload-artifact@v2
 #        with:
 #          path: ./Artifacts/raw_build_data.zip
-      - run: sh ./ESP_Action_Build_Scripts/create_eef_package.sh ${{env.SKETCH_NAME}}
+      - run: sh ./ESP_Action_Build_Scripts/create_eef_package.sh ${{env.SKETCH_NAME}} ${{env.ESP32_VERSION}}
       - uses: actions/upload-artifact@v2
         with:
           name: ${{env.SKETCH_NAME}}_eef
-          path: .EEP/*
+          path: ./EEP/*
   
           
