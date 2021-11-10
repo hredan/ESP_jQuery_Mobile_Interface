@@ -7,7 +7,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
     - run: pip install cpplint
-    - run: cpplint --extensions=hpp,cpp,h,c,ino --recursive .
+    - run: cpplint --linelength=120 --extensions=hpp,cpp,h,c,ino --recursive .
   arduino_lint:
     runs-on: ubuntu-latest
     steps:
