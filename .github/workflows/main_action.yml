@@ -36,7 +36,8 @@ jobs:
 #          path: ./Artifacts/raw_build_data.zip
       - run: sh ./ESP_Action_Build_Scripts/create_eef_package.sh ${{env.SKETCH_NAME}}
       - uses: actions/upload-artifact@v2
-        with:          
-          path: ./Artifacts/${{env.SKETCH_NAME}}.eep
+        with:
+          name: ${{env.SKETCH_NAME}}_eef
+          path: .EEP/.
   
           
