@@ -1,0 +1,46 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual eep creation
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      core:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'ESP core'
+        # Default value if no value is explicitly provided
+        default: 'esp32'
+        # Input has to be provided for the workflow to run
+        required: true
+      board:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'ESP board type'
+        # Default value if no value is explicitly provided
+        default: 'lolin32'
+        # Input has to be provided for the workflow to run
+        required: true
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "greet"
+  build_eep:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    
+    env:
+        SKETCH_NAME: ESP_jQuery_Mobile_Interface
+        
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: actions/setup-python@v2
+      - run: pip install esptool
+      - run: sh ./ESP_Action_Build_Scripts/build_sketch.sh -s ${{env.SKETCH_NAME}} -c ${{ github.event.inputs.core }} -b ${{ github.event.inputs.board }} -f 160
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ github.event.inputs.core }}_${{ github.event.inputs.board }}_${{env.SKETCH_NAME}}
+          path: ./EEP/*
