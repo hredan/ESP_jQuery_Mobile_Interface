@@ -18,26 +18,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-        SKETCH_NAME: ESP_jQuery_Mobile_Interface
-        ESP32_VERSION: 2.0.1
-        ESP8266_VERSION: 3.0.2
+        SKETCH_NAME: ESP_jQuery_Mobile_Interface       
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
       - uses: actions/setup-python@v2
       - run: pip install esptool
-      - run: sh ./ESP_Action_Build_Scripts/build_data.sh ${{env.SKETCH_NAME}}
-      - run: sh ./ESP_Action_Build_Scripts/build_sketch.sh ESP8266 ${{env.ESP8266_VERSION}}
-      - run: sh ./ESP_Action_Build_Scripts/build_sketch.sh ESP32 ${{env.ESP32_VERSION}}
-#      - run: sh ./ESP_Action_Build_Scripts/save_raw_data.sh
-#      - uses: actions/upload-artifact@v2
-#        with:
-#          path: ./Artifacts/raw_build_data.zip
-      - run: sh ./ESP_Action_Build_Scripts/create_eef_package.sh ${{env.SKETCH_NAME}} ${{env.ESP32_VERSION}}
+      - run: sh ./ESP_Action_Build_Scripts/build_sketch.sh -s ${{env.SKETCH_NAME}} -c esp8266 -b d1_mini -f 160 
+      - run: sh ./ESP_Action_Build_Scripts/build_sketch.sh -s ${{env.SKETCH_NAME}} -c esp32 -b d1_mini32 -f 160
       - uses: actions/upload-artifact@v2
         with:
-          name: ${{env.SKETCH_NAME}}_eef
+          name: ${{env.SKETCH_NAME}}_eep
           path: ./EEP/*
   
           
