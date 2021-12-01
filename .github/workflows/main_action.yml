@@ -15,21 +15,38 @@ jobs:
       - uses: arduino/arduino-lint-action@v1
         with:
           library-manager: 'update'
-  build:
+  build_ESP32:
     runs-on: ubuntu-latest
     env:
-        SKETCH_NAME: ESP_jQuery_Mobile_Interface       
+        SKETCH_NAME: ESP_jQuery_Mobile_Interface
+        CORE: esp32
+        BOARD: d1_mini32
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
       - uses: actions/setup-python@v2
       - run: pip install esptool
-      - run: sh ./ESP_Action_Build_Scripts/build_sketch.sh -s ${{env.SKETCH_NAME}} -c esp8266 -b d1_mini -f 160 
-      - run: sh ./ESP_Action_Build_Scripts/build_sketch.sh -s ${{env.SKETCH_NAME}} -c esp32 -b d1_mini32 -f 160
+      - run: sh ./ESP_Action_Build_Scripts/build_sketch.sh -s ${{env.SKETCH_NAME}} -c ${{env.CORE}} -b ${{env.BOARD}} -f 160
       - uses: actions/upload-artifact@v2
         with:
-          name: ${{env.SKETCH_NAME}}_eep
+          name: ${{env.CORE}}_${{env.BOARD}}_${{env.SKETCH_NAME}}
           path: ./EEP/*
-  
+  build_ESP8266:
+    runs-on: ubuntu-latest
+    env:
+        SKETCH_NAME: ESP_jQuery_Mobile_Interface
+        CORE: esp8266
+        BOARD: d1_mini
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: actions/setup-python@v2
+      - run: pip install esptool
+      - run: sh ./ESP_Action_Build_Scripts/build_sketch.sh -s ${{env.SKETCH_NAME}} -c ${{env.CORE}} -b ${{env.BOARD}} -f 160
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{env.CORE}}_${{env.BOARD}}_${{env.SKETCH_NAME}}
+          path: ./EEP/*
           
