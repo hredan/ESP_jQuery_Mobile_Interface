@@ -1,2 +1,6 @@
-/build
-/cache
+CACHE_ESP8266
+BIN_DATA
+BIN_ESP8266_d1_mini
+tools
+EEP
+/*.eep
