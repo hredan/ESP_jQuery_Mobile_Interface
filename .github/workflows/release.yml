@@ -30,8 +30,9 @@ jobs:
           else
             PRERELESE=false
           fi
-          echo "${TAG}" >> $GITHUB_ENV
-          echo "${PRERELESE}" >> $GITHUB_ENV
+          # add variables to env
+          echo "TAG=${TAG}" >> $GITHUB_ENV
+          echo "PRERELESE=${PRERELESE}" >> $GITHUB_ENV
           echo "TAG: ${TAG}"
           echo "PRE: ${PRERELESE}"
       - name: Build esp8266 binaries and create eep file
