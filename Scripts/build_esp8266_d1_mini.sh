@@ -7,6 +7,7 @@ CPUF=80
 
 SCRIPT_DIR=${0%/*}
 
+# cleanup EEP directory before starting build and creating eef package (eep)
 EEP_DIR=${SCRIPT_DIR}/../EEP
 if [ -d ${EEP_DIR} ]; then
     rm -r ${EEP_DIR}

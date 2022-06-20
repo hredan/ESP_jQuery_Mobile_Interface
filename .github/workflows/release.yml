@@ -21,14 +21,26 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: recursive
-      - name: Get the tag name
-        run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+      - name: Get the tag name and prerelease flag
+        #bash string replace pattern /oldstring/newstring
+        run: |
+          TAG=${GITHUB_REF/refs\/tags\//}
+          if [[ ${TAG} == *"prerelease"* ]]; then
+            PRERELEASE=true
+          else
+            PRERELEASE=false
+          fi
+          # add variables to env
+          echo "TAG=${TAG}" >> $GITHUB_ENV
+          echo "PRERELEASE=${PRERELEASE}" >> $GITHUB_ENV
+          echo "TAG: ${TAG}"
+          echo "PRE: ${PRERELEASE}"
       - name: Build esp8266 binaries and create eep file
         run: |
           bash ./ESP_Build_Scripts/build_sketch.sh -s ${{env.SKETCH_NAME}} -c ${{env.CORE_1}} -b ${{env.BOARD_1}} -f 160
           bash ./ESP_Build_Scripts/create_build_info.sh -s $GITHUB_SHA -r $GITHUB_REPOSITORY -t ${{env.TAG}}
           bash ./ESP_Build_Scripts/create_eef_package.sh -s ${{env.SKETCH_NAME}} -c ${{env.CORE_1}} -b ${{env.BOARD_1}}
-      - name: Build esp8266 binaries and create eep file
+      - name: Build esp32 binaries and create eep file
         run: |
           bash ./ESP_Build_Scripts/build_sketch.sh -s ${{env.SKETCH_NAME}} -c ${{env.CORE_2}} -b ${{env.BOARD_2}} -f 160
           bash ./ESP_Build_Scripts/create_build_info.sh -s $GITHUB_SHA -r $GITHUB_REPOSITORY -t ${{env.TAG}}
@@ -42,7 +54,7 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           draft: false
-          prerelease: false
+          prerelease: ${{env.PRERELEASE}}
       - name: Upload Release Asset esp8266
         id: upload-release-asset-esp8266 
         uses: actions/upload-release-asset@v1
