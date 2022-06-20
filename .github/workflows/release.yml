@@ -40,7 +40,7 @@ jobs:
           bash ./ESP_Build_Scripts/build_sketch.sh -s ${{env.SKETCH_NAME}} -c ${{env.CORE_1}} -b ${{env.BOARD_1}} -f 160
           bash ./ESP_Build_Scripts/create_build_info.sh -s $GITHUB_SHA -r $GITHUB_REPOSITORY -t ${{env.TAG}}
           bash ./ESP_Build_Scripts/create_eef_package.sh -s ${{env.SKETCH_NAME}} -c ${{env.CORE_1}} -b ${{env.BOARD_1}}
-      - name: Build esp8266 binaries and create eep file
+      - name: Build esp32 binaries and create eep file
         run: |
           bash ./ESP_Build_Scripts/build_sketch.sh -s ${{env.SKETCH_NAME}} -c ${{env.CORE_2}} -b ${{env.BOARD_2}} -f 160
           bash ./ESP_Build_Scripts/create_build_info.sh -s $GITHUB_SHA -r $GITHUB_REPOSITORY -t ${{env.TAG}}
