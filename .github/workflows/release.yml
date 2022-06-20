@@ -21,8 +21,19 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: recursive
-      - name: Get the tag name
-        run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+      - name: Get the tag name and prerelease flag
+        #bash string replace pattern /oldstring/newstring
+        run: |
+          TAG=${GITHUB_REF/refs\/tags\//}
+          if [[ ${TAG} == *"prerelease"* ]]; then
+            PRERELESE=true
+          else
+            PRERELESE=false
+          fi
+          echo "${TAG}" >> $GITHUB_ENV
+          echo "${PRERELESE}" >> $GITHUB_ENV
+          echo "TAG: ${TAG}"
+          echo "PRE: ${PRERELESE}"
       - name: Build esp8266 binaries and create eep file
         run: |
           bash ./ESP_Build_Scripts/build_sketch.sh -s ${{env.SKETCH_NAME}} -c ${{env.CORE_1}} -b ${{env.BOARD_1}} -f 160
@@ -42,7 +53,7 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           draft: false
-          prerelease: false
+          prerelease: ${{env.PRERELEASE}}
       - name: Upload Release Asset esp8266
         id: upload-release-asset-esp8266 
         uses: actions/upload-release-asset@v1
