@@ -26,15 +26,15 @@ jobs:
         run: |
           TAG=${GITHUB_REF/refs\/tags\//}
           if [[ ${TAG} == *"prerelease"* ]]; then
-            PRERELESE=true
+            PRERELEASE=true
           else
-            PRERELESE=false
+            PRERELEASE=false
           fi
           # add variables to env
           echo "TAG=${TAG}" >> $GITHUB_ENV
-          echo "PRERELESE=${PRERELESE}" >> $GITHUB_ENV
+          echo "PRERELEASE=${PRERELEASE}" >> $GITHUB_ENV
           echo "TAG: ${TAG}"
-          echo "PRE: ${PRERELESE}"
+          echo "PRE: ${PRERELEASE}"
       - name: Build esp8266 binaries and create eep file
         run: |
           bash ./ESP_Build_Scripts/build_sketch.sh -s ${{env.SKETCH_NAME}} -c ${{env.CORE_1}} -b ${{env.BOARD_1}} -f 160
