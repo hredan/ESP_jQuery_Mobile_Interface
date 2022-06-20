@@ -4,11 +4,11 @@ on:
     tags:
     - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
-name: Upload Release Asset
+name: Create Release and upload assets
 
 jobs:
-  build:
-    name: Upload Release Asset
+  release:
+    name: Create Release and upload assets
     runs-on: ubuntu-latest
     env:
         SKETCH_NAME: ESP_jQuery_Mobile_Interface 
